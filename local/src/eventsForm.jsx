@@ -1,151 +1,210 @@
 import React, { useState } from "react";
-import { Grid, Card, CardContent, Typography, Button } from "@mui/material";
+import { Grid, Card, CardContent, Typography, Button , Box, TextField, Checkbox, FormControlLabel} from "@mui/material";
+import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import light from "./images/light.png";
+import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import light from "./images/sun.png";
 import dark from "./images/dark-mode.png";
-
+import { Switch, MenuItem, Select, InputLabel } from "@mui/material";
 
 const theme = createTheme({
-    breakpoints: {
-      values: {
-        xs: 630,
-        sm: 800,
-        md: 1000,
-      },
+  breakpoints: {
+    values: {
+      xs: 630,
+      sm: 800,
+      md: 1000,
     },
-  });
+  },
+});
 
 function EventsForm() {
-    const [isEateriesHovered, setIsEateriesHovered] = useState(false);
-    const [isEventsHovered, setIsEventsHovered] = useState(false);
-    const [isActivitiesHovered, setIsActivitiesHovered] = useState(false);
-    const [isButtonHovered, setIsButtonHovered] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const [selectedCard, setSelectedCard] = useState(null);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+  const [isMultiDay, setIsMultiDay] = useState(false);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+  const [description, setDescription] = useState(""); 
+  const [isFreeEvent, setIsFreeEvent] = useState(false);
+  const [categoryPrices, setCategoryPrices] = useState({});
+  const [categoryTickets, setCategoryTickets] = useState({});
+  const [categories, setCategories] = useState([]);
 
-    const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-    }
 
-    const handleCardClick = (cardName) => {
-        setSelectedCard(cardName === selectedCard ? null : cardName);
-    };
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  }
 
-    const getCardBorderStyle = (cardName) => {
-        return selectedCard === cardName
-            ? { border: isDarkMode ? '#c2a464 solid 2px' : '#000000 solid 2px' }
-            : {};
-    };
+  const handleCheckboxChange = (event) => {
+    setIsMultiDay(event.target.checked);
+    setSelectedDateRange([null, null]);
+  };
 
-    return (
-        <div>
-              <ThemeProvider theme={theme}>
-            <Card style={{ background: isDarkMode ? 'linear-gradient(180deg, rgba(32,29,29,1) 37%, rgba(194,164,100,1) 92%)' : 'linear-gradient(180deg, rgba(194,164,100,0.8716736694677871) 18%, rgba(0,0,0,1) 69%)', padding: '1.7%', borderRadius: '0px'}}>
-                <Card style={{ position: 'relative', zIndex: 1,height:'100%', width: "85%", margin: '0 auto', marginTop: '6px', backgroundColor: isDarkMode ? '#080806' : '#a88e56' }}>
-                    <CardContent>
-                    <Button style={{ position: 'absolute', top: '10px', right: '10px', width: "30px", height: "30px",paddingBottom:'50px' , paddingTop:'10px'}} onClick={(e) => e.stopPropagation()}>
-                    <img src={isDarkMode ? light : dark} style={{ width: "30px", height: "30px" }} onClick={toggleDarkMode}/>
-                </Button>
-                        <Typography style={{paddingTop:'3%',alignItems: 'center'}} className={isDarkMode ? "Header1" : "Header2"}>How many events are you planning to create?</Typography>
-                        <Grid container style={{ marginTop: '0.5%',  justifyContent: 'center'}} spacing={3}>
+  const handleStartTimeChange = (newValue) => {
+    setStartTime(newValue);
+  };
 
-                            <Grid item xs={10} sm={9} md={3} >
-                                <Card className="card" onMouseEnter={() => setIsEventsHovered(true)} onMouseLeave={() => setIsEventsHovered(false)}  onClick={()=>handleCardClick("events")} 
-                                  style={{ maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("events") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEventsHovered ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ paddingTop: '60px',paddingBottom:'60px', paddingLeft:'30px', paddingRight:'30px', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>Only 1</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+  const handleEndTimeChange = (newValue) => {
+    setEndTime(newValue);
+  };
 
-                            <Grid item xs={10} sm={9} md={3} >
-                                <Card className="card" onMouseEnter={() => setIsEventsHovered(true)} onMouseLeave={() => setIsEventsHovered(false)}  onClick={()=>handleCardClick("events")} 
-                                  style={{ maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("events") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEventsHovered ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0px', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>2/10</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+  
+  const handleFreeEventToggle = () => {
+    setIsFreeEvent(!isFreeEvent);
+  };
 
-                            <Grid item xs={10} sm={9} md={3} >
-                                <Card className="card" onMouseEnter={() => setIsEateriesHovered(true)} onMouseLeave={() => setIsEateriesHovered(false)} onClick={() =>handleCardClick("eateries")}  
-                                style={{ maxWidth: '85%', maxHeight: '100%', ...getCardBorderStyle("eateries") , borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEateriesHovered ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0%', position: 'relative' }}>
-                                      <Typography className={isDarkMode ? "text3" : "text1"}>10+</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+  const handleAddCategory = () => {
+    setCategories([...categories, '']);
+  };
 
-                            <Grid item xs={10} sm={9} md={3} >
-                                <Card className="card" onMouseEnter={() => setIsActivitiesHovered(true)} onMouseLeave={() => setIsActivitiesHovered(false)} onClick={() =>handleCardClick("activities")} 
-                               style={{ marginTop:'2%' , maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("activities") , borderRadius: '0px',  boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isActivitiesHovered ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0%', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>Not Sure</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+  const handleCategoryChange = (index, value) => {
+    const updatedCategories = [...categories];
+    updatedCategories[index] = value;
+    setCategories(updatedCategories);
+  };
 
-                        </Grid>
+  const handleCategoryPriceChange = (category, price) => {
+    setCategoryPrices({
+      ...categoryPrices,
+      [category]: price,
+    });
+  };
 
-                        <Typography style={{paddingTop:'3%'}} className={isDarkMode ? "Header1" : "Header2"}>How big is your event?</Typography>
-                        <Grid container style={{ marginTop: '0.5%',  justifyContent: 'center'}} spacing={3}>
+  const handleCategoryTicketChange = (category, tickets) => {
+    setCategoryTickets({
+      ...categoryTickets,
+      [category]: tickets,
+    });
+  };
 
-                            <Grid item xs={10} sm={9} md={2} >
-                                <Card className="card" onMouseEnter={() => setIsEventsHovered(true)} onMouseLeave={() => setIsEventsHovered(false)}  onClick={()=>handleCardClick("events")} 
-                                  style={{ maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("events") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEventsHovered ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0px', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>25 people</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <Card style={{ background: isDarkMode ? '#28282B' : '#d4d4d4', padding: '1.7%', borderRadius: '0px', display: 'flex' }}>
+        <Card style={{ position: 'relative', zIndex: 1,height:'100%', width: "85%", margin: '0 auto', marginTop: '6px', backgroundColor: isDarkMode ? '#080806' : '#f5f5f5' }}>
+          <CardContent>
+            <div style={{display:'flex'}}>
+          <div style={{ flex: 1 }}>
+            <Typography>Name of the event</Typography>
+            <TextField id="filled-basic" label="Event Name" variant="filled" />
 
-                            <Grid item xs={10} sm={9} md={2} >
-                                <Card className="card" onMouseEnter={() => setIsEventsHovered(true)} onMouseLeave={() => setIsEventsHovered(false)}  onClick={()=>handleCardClick("events")} 
-                                  style={{ maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("events") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEventsHovered ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0px', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>25-50 people</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+            <Typography>Who is this event organized by?</Typography>
+            <Typography>(Enter self if there is no company)</Typography>
+            <TextField id="filled-basic"  label="Company Name" variant="filled" />
 
-                            <Grid item xs={10} sm={9} md={2} >
-                                <Card className="card" onMouseEnter={() => setIsEventsHovered(true)} onMouseLeave={() => setIsEventsHovered(false)}  onClick={()=>handleCardClick("events")} 
-                                  style={{ maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("events") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEventsHovered ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0px', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>50-150 people</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+            <Typography>Date for the event</Typography>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              {isMultiDay ? (
+                <React.Fragment>
+                  <DatePicker
+                    label="Start Date"
+                    value={selectedDateRange[0]}
+                    onChange={(newValue) => setSelectedDateRange([newValue, selectedDateRange[1]])}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                  <DatePicker
+                    label="End Date"
+                    value={selectedDateRange[1]}
+                    onChange={(newValue) => setSelectedDateRange([selectedDateRange[0], newValue])}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </React.Fragment>
+              ) : (
+                <DatePicker
+                  label="Date"
+                  value={selectedDateRange[0]}
+                  onChange={(newValue) => setSelectedDateRange([newValue, null])}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              )}
+            </LocalizationProvider>
+            <div>
+              <FormControlLabel
+                control={<Checkbox checked={isMultiDay} onChange={handleCheckboxChange} />}
+                label="More than 1 day?"
+              />
+            </div>
+              <Typography>Start Time</Typography>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <TimePicker
+                value={startTime}
+                onChange={handleStartTimeChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <Typography>End time</Typography>
+              <TimePicker
+                value={endTime}
+                onChange={handleEndTimeChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+            <Typography>Ticket Price</Typography>
+            <div style={{display:'flex'}}>
+            <div><Switch checked={isFreeEvent} onChange={handleFreeEventToggle} /></div>
+            <div><Typography>{isFreeEvent ? 'Free event' : 'Paid event'}</Typography></div>
+            </div>
+            {!isFreeEvent && (
+                  <React.Fragment>
+                  <InputLabel >Category</InputLabel>
+                  {categories.map((category, index) => (
+                    <div key={index}>
+                     
+                      <Select
+                        value={category}
+                        onChange={(e) => handleCategoryChange(index, e.target.value)}
+                        label={`Category ${index + 1}`}
+                        style={{ width: '150px', marginRight: '10px' }}
+                      >
+                        <MenuItem value="VIP">VIP</MenuItem>
+                        <MenuItem value="EarlyBird">Early Bird</MenuItem>
+                        <MenuItem value="General">General</MenuItem>
+                        <MenuItem value="Balcony">Balcony</MenuItem>
+                      </Select>
+                      <TextField
+                        label="Price"
+                        value={categoryPrices[category] || ''}
+                        onChange={(e) => handleCategoryPriceChange(category, e.target.value)}
+                        type="number"
+                        style={{ marginRight: '10px' }}
+                      />
+                      <TextField
+                        label="Number of Tickets"
+                        value={categoryTickets[category] || ''}
+                        onChange={(e) => handleCategoryTicketChange(category, e.target.value)}
+                        type="number"
+                        style={{ marginRight: '10px' }}
+                      />
+                    </div>
+                  ))}
+                  <Button onClick={handleAddCategory} style={{ marginTop: '10px' }}>Add Category</Button>
+                </React.Fragment>
+                )}
+        
+            </div>
 
-                            <Grid item xs={10} sm={9} md={2} >
-                                <Card className="card" onMouseEnter={() => setIsEateriesHovered(true)} onMouseLeave={() => setIsEateriesHovered(false)} onClick={() =>handleCardClick("eateries")}  
-                                style={{ maxWidth: '85%', maxHeight: '100%', ...getCardBorderStyle("eateries") , borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isEateriesHovered ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0%', position: 'relative' }}>
-                                      <Typography className={isDarkMode ? "text3" : "text1"}>150+ people</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-
-                            <Grid item xs={10} sm={9} md={2} >
-                                <Card className="card" onMouseEnter={() => setIsActivitiesHovered(true)} onMouseLeave={() => setIsActivitiesHovered(false)} onClick={() =>handleCardClick("activities")} 
-                               style={{ marginTop:'2%' , maxWidth: '85%', maxHeight: '100%',  ...getCardBorderStyle("activities") , borderRadius: '0px',  boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#131212' : '#c2a464', transform: isActivitiesHovered ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ padding: '0%', position: 'relative' }}>
-                                        <Typography className={isDarkMode ? "text3" : "text1"}>Not Sure</Typography>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-
-                        </Grid>
-
-                        <Button  variant="contained" className="buttonText" onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} style={{width:'18%',height:'45px', marginLeft: '41%', marginTop:'40px', border: '#000000 solid 2px', borderRadius: '20px', backgroundColor: isDarkMode ? '#c2a464' :'#000000' , color: isDarkMode ?  '#000000' : '#c2a464', transform: isButtonHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>CONTINUE</Button>
-
-                    </CardContent>
-                </Card>
-            </Card>
-            </ThemeProvider>
-        </div>
-
-    );
+            <div style={{ flex: 1 }}>
+              <Typography>Description of the event</Typography>
+              <TextField
+              id="filled-basic"
+              label="Enter a description"
+              variant="filled"
+              value={description}
+              onChange={handleDescriptionChange}
+              multiline
+              rows={4}
+            />
+            </div>
+            </div>
+            </CardContent>
+        </Card>
+        </Card>
+      </ThemeProvider>
+    </div>
+  );
 };
 
 export default EventsForm;

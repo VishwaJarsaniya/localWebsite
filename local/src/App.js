@@ -1,4 +1,5 @@
 import Category from './category';
+import EventsCount from './eventsCount';
 import EventsForm from './eventsForm';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
@@ -6,7 +7,8 @@ function App() {
     <Router>
     <Routes>
     <Route path="/" element={<Category />} />
-    <Route path="/eventsForm"  element={<EventsForm />} />
+    <Route path="/eventsCount"  element={<EventsCount />} />
+    <Route path="/eventsForm" element={<EventsForm />} />
     </Routes>
     </Router>
   );

@@ -56,7 +56,7 @@ function Category() {
                     <Button style={{ position: 'absolute', top: '10px', right: '10px', width: "30px", height: "30px",paddingBottom:'50px' , paddingTop:'10px'}} onClick={(e) => e.stopPropagation()}>
                     <img src={isDarkMode ? light : dark} style={{ width: "30px", height: "30px" }} onClick={toggleDarkMode}/>
                 </Button>
-                        <Typography style={{paddingTop:'3%',alignItems: 'center'}} className={isDarkMode ? "Header1" : "Header2"}>What Category Do You Fall Under?</Typography>
+                        <Typography style={{paddingTop:'3%',textAlign: 'center'}} className={isDarkMode ? "Header1" : "Header2"}>What Category Do You Fall Under?</Typography>
                         <Grid container style={{ marginTop: '0.5%',  justifyContent: 'center'}} spacing={3}>
 
                             <Grid item xs={10} sm={9} md={4} >
@@ -91,7 +91,7 @@ function Category() {
 
                         </Grid>
                         <Button  variant="contained" className="buttonText" onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} style={{width:'18%',height:'45px', marginLeft: '41%', marginTop:'40px', border: '#000000 solid 2px', borderRadius: '20px', backgroundColor: isDarkMode ? '#c2a464' :'#000000' , color: isDarkMode ?  '#000000' : '#c2a464', transform: isButtonHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                        <Link to={"/eventsForm"} style={{textDecoration:'none'}} >CONTINUE</Link></Button>
+                        <Link to={"/eventsCount"} style={{textDecoration:'none'}} >CONTINUE</Link></Button>
 
                     </CardContent>
                 </Card>

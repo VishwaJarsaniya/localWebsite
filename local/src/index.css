@@ -26,16 +26,16 @@ code {
   font-family: 'Exo 2', sans-serif !important; 
   font-size: 325% !important;
   margin-top: 0% !important;
-  margin-left: 16% !important;
-  color: #c2a464;
+  /* margin-left: 16% !important; */
+  color: #fe3044;
 }
 
 .Header2{
   font-family: 'Exo 2', sans-serif !important; 
   font-size: 325% !important;
   margin-top: 0% !important;
-  margin-left: 16% !important;
-  color: #000000;
+  /* margin-left: 16% !important; */
+  color: #fe3044;
 }
 
 .text1{
@@ -43,6 +43,7 @@ code {
   font-size: 150% !important;
   margin-left: 15% !important;
   margin-right: 10% !important;
+  color: whitesmoke;
 }
 
 
@@ -51,7 +52,7 @@ code {
   font-size: 150% !important;
   margin-left: 13% !important;
   margin-right: 10% !important;
-  color: #c2a464;
+  /* color: #c2a464; */
 }
 
 
@@ -71,7 +72,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 310% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #c2a464;
   }
   
@@ -79,7 +80,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 310% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #000000;
   }
   
@@ -112,7 +113,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 280% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #c2a464;
   }
   
@@ -120,7 +121,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 280% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #000000;
   }
   
@@ -153,7 +154,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 280% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #c2a464;
   }
   
@@ -161,7 +162,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 280% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #000000;
   }
   
@@ -194,7 +195,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 230% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #c2a464;
   }
   
@@ -202,7 +203,7 @@ code {
     font-family: 'Exo 2', sans-serif !important; 
     font-size: 230% !important;
     margin-top: 0% !important;
-    margin-left: 2% !important;
+    /* margin-left: 2% !important; */
     color: #000000;
   }
   
