@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { Grid, Card, CardContent, Typography, Button , Box} from "@mui/material";
+import { Grid, Card, CardContent, Typography, Button } from "@mui/material";
 import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import light from "./images/sun.png";
 import dark from "./images/dark-mode.png";
+import concert2 from "./images/concert2.jpg";
+import blue1 from "./images/blue1.png";
+import pinkblue2 from "./images/pinkblue2.png"
+import blue2 from "./images/blue2.png";
+import blue3 from "./images/blue3.png";
+import blue4 from "./images/blue4.png";
+import pinkblue4 from "./images/pinkblue4.png";
+import pinkblue6 from "./images/pinkblue6.png";
+import pinkblue8 from "./images/pinkblue8.png";
 
 
 const theme = createTheme({
@@ -27,12 +36,7 @@ function EventsCount() {
     const [isB4, setB4] = useState(false);
     const [isB5, setB5] = useState(false);
     const [isButtonHovered, setIsButtonHovered] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
-
-    const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-    }
 
     const handleCardClick = (cardName) => {
         setSelectedCard(cardName === selectedCard ? null : cardName);
@@ -40,112 +44,113 @@ function EventsCount() {
 
     const getCardBorderStyle = (cardName) => {
         return selectedCard === cardName
-            ? { border: isDarkMode ? '#f5f5f5 solid 6px' : '#000000 solid 3px' }
+            ? { border: '#11047A solid 2px'}
             : {};
     };
 
     return (
         <div>
               <ThemeProvider theme={theme}>
-            <Card style={{ background: isDarkMode ? '#28282B' : '#d4d4d4', padding: '1.7%', borderRadius: '0px'}}>
-                <Card style={{ position: 'relative', zIndex: 1,height:'100%', width: "85%", margin: '0 auto', marginTop: '6px', backgroundColor: isDarkMode ? '#080806' : '#f5f5f5' }}>
-                    <CardContent>
-                    <Button style={{ position: 'absolute', top: '20px', right: '10px', width: "30px", height: "30px",paddingBottom:'50px' , paddingTop:'10px'}} onClick={(e) => e.stopPropagation()}>
-                    <img src={isDarkMode ? light : dark} style={{ width: "35px", height: "35px" }} onClick={toggleDarkMode}/>
-                </Button>
-                        <Typography style={{paddingTop:'3%',textAlign:'center'}} className={isDarkMode ? "Header1" : "Header2"}>How many events are you planning to create?</Typography>
-                        <Grid container style={{ marginTop: '0.5%',  justifyContent: 'center'}} spacing={3}>
-                        <Grid item xs={10} sm={9} md={2} >
+            <Card style={{ background:'linear-gradient(0deg, rgba(100,61,184,1) 13%, rgba(98,58,183,1) 13%, rgba(233,227,255,1) 96%)', borderRadius: '0px', zIndex:1, position:'relative'}}>
+            <Card style={{ background: '#FFFFFF', borderRadius: '35px', padding:'0%', margin:'3%', zIndex:1, position:'relative'}}>
+                <img src={concert2} style={{width: '100%', height: '430px'}}/>
+                    
+                        <Typography style={{paddingTop:'5%',textAlign:'center', paddingBottom:'2%'}} className="Header2">How many events are you planning to create?</Typography>
+                        <Grid container style={{ marginTop: '0.8%',  justifyContent: 'center', paddingBottom:'7%', position:'relative'}} spacing={3}>
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}}>
                                 <Card className="card" onMouseEnter={() => setA1(true)} onMouseLeave={() => setA1(false)}  onClick={()=>handleCardClick("A1")} 
-                                  style={{ width: '160px', height: '160px',  ...getCardBorderStyle("A1") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isA1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{  position: 'relative' , paddingTop:'60px' }}>
-                                        <Typography style={{textAlign:'center', fontSize:''}} className={isDarkMode ? "text3" : "text1"}>Only 1</Typography>
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A1") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
+                                        <Typography style={{textAlign:'center', fontSize:''}} className= "text1">Only 1</Typography>
                                    </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
                                 <Card className="card" onMouseEnter={() => setA2(true)} onMouseLeave={() => setA2(false)}  onClick={()=>handleCardClick("A2")} 
-                                  style={{ width: '160px', height: '160px',  ...getCardBorderStyle("A2") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isA2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{  position: 'relative' , paddingTop:'60px' }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>2/10</Typography>
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A2") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
+                                        <Typography style={{textAlign:'center'}} className= "text1">2/10</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
                                 <Card className="card" onMouseEnter={() => setA3(true)} onMouseLeave={() => setA3(false)}  onClick={()=>handleCardClick("A3")} 
-                                  style={{ width: '160px', height: '160px',  ...getCardBorderStyle("A3") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isA3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{  position: 'relative' , paddingTop:'60px' }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>10+</Typography>
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A3") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
+                                        <Typography style={{textAlign:'center'}} className="text1">10+</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}}>
                                 <Card className="card" onMouseEnter={() => setA4(true)} onMouseLeave={() => setA4(false)}  onClick={()=>handleCardClick("A4")} 
-                                  style={{ width: '160px', height: '160px',  ...getCardBorderStyle("A4") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isA4 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{  position: 'relative' , paddingTop:'60px' }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>Not Sure</Typography>
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A4"), borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA4 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
+                                        <Typography style={{textAlign:'center'}} className="text1">Not Sure</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
+                            <img src={blue1} style={{position: 'absolute', left: '0', width: '32%', zIndex:0, marginBottom:'5%', paddingLeft:'2%'}} />
+                            <img src={blue2} style={{position: 'absolute', right: '0', width: '32%', zIndex:0, paddingTop:'1%'}} />
+                            
+                            </Grid>
 
-                           
-                        </Grid>
+                    
 
-                        <Typography style={{paddingTop:'3%', textAlign:'center'}} className={isDarkMode ? "Header1" : "Header2"}>How big is your event?</Typography>
+                       
+                        <Typography style={{paddingTop:'10%', textAlign:'center', paddingBottom:'2%', zIndex:1, position:'relative'}} className="Header2">How big is your event?</Typography>
                         <Grid container style={{ marginTop: '0.5%',  justifyContent: 'center'}} spacing={3}>
 
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}}>
                                 <Card className="card" onMouseEnter={() => setB1(true)} onMouseLeave={() => setB1(false)}  onClick={()=>handleCardClick("B1")} 
-                                  style={{ width: '160px', height: '160px',  ...getCardBorderStyle("B1") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isB1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{  position: 'relative' , paddingTop:'45px' }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>25 people</Typography>
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("B1") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background:'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
+                                        <Typography style={{textAlign:'center'}} className= "text1">25 people</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
                                 <Card className="card" onMouseEnter={() => setB2(true)} onMouseLeave={() => setB2(false)}  onClick={()=>handleCardClick("B2")} 
-                                  style={{ width: '160px', height: '160px',  ...getCardBorderStyle("B2") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isB2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ position: 'relative', paddingTop:'45px'  }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>25-50 people</Typography>
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("B2") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{ position: 'relative', paddingTop:'55px'  }}>
+                                        <Typography style={{textAlign:'center'}} className="text1">25-50 people</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
                                 <Card className="card" onMouseEnter={() => setB3(true)} onMouseLeave={() => setB3(false)}  onClick={()=>handleCardClick("B3")} 
-                                  style={{width: '160px', height: '160px',  ...getCardBorderStyle("B3") ,borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isB3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ position: 'relative', paddingTop:'45px'  }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>50-150 people</Typography>
+                                  style={{width: '200px', height: '200px',  ...getCardBorderStyle("B3") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{ position: 'relative', paddingTop:'55px'  }}>
+                                        <Typography style={{textAlign:'center'}} className="text1">50-150 people</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
                                 <Card className="card" onMouseEnter={() => setB4(true)} onMouseLeave={() => setB4(false)} onClick={() =>handleCardClick("B4")}  
-                                style={{width: '160px', height: '160px', ...getCardBorderStyle("B4") , borderRadius: '40px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isB4 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{ position: 'relative' , paddingTop:'45px' }}>
-                                      <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>150+ people</Typography>
+                                style={{width: '200px', height: '200px', ...getCardBorderStyle("B4") , borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background:'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB4 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{ position: 'relative' , paddingTop:'55px' }}>
+                                      <Typography style={{textAlign:'center'}} className= "text1">150+ people</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
 
-                            <Grid item xs={10} sm={9} md={2} >
+                            <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
                                 <Card className="card" onMouseEnter={() => setB5(true)} onMouseLeave={() => setB5(false)} onClick={() =>handleCardClick("B5")} 
-                               style={{width: '160px', height: '160px', maxHeight: '100%',  ...getCardBorderStyle("B5") , borderRadius: '40px',  boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: isDarkMode ? '#fceebf' : '#4880e2', transform: isB5 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                                    <CardContent style={{  position: 'relative' , paddingTop:'60px' }}>
-                                        <Typography style={{textAlign:'center'}} className={isDarkMode ? "text3" : "text1"}>Not Sure</Typography>
+                               style={{width: '200px', height: '200px', maxHeight: '100%',  ...getCardBorderStyle("B5") , borderRadius: '0px',  boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB5 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                    <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
+                                        <Typography style={{textAlign:'center'}} className="text1">Not Sure</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
-
+                            <img src={blue3} style={{position: 'absolute', bottom:'10',right: '0', width: '35%', zIndex:0, marginTop: '2.5%'}} /> 
+                            <img src={blue4} style={{position: 'absolute', left: '0', width: '32%', zIndex:0, marginTop: '2.5%', paddingTop:'5%'}} /> 
                         </Grid>
 
-                        <Button  variant="contained" className="buttonText" onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} style={{width:'18%',height:'45px', marginLeft: '41%', marginTop:'40px', border: isDarkMode?'#000000 solid 2px' : '#f5f5f5 solid 2px', borderRadius: '20px', backgroundColor: isDarkMode ? '#fe3044' :'#fe3044' , color: isDarkMode ?  '#000000' : '#f5f5f5', transform: isButtonHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
-                            <Link to={"/eventsForm"}>CONTINUE</Link></Button>
-
-                    </CardContent>
-                </Card>
+                        <Link to={"/eventsForm"}><Button  variant="contained"  onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} style={{width:'18%',height:'55px',color:'#11047A', marginLeft: '41%', marginTop:'180px', marginBottom:'100px', border: '#ffffff solid 2px', borderRadius: '20px', backgroundColor:'#e2e8f0', transform: isButtonHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer', fontSize:'22px' }}>
+                           CONTINUE</Button></Link>
+</Card>
             </Card>
             </ThemeProvider>
         </div>
