@@ -2,17 +2,12 @@ import React, { useState } from "react";
 import { Grid, Card, CardContent, Typography, Button } from "@mui/material";
 import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import light from "./images/sun.png";
-import dark from "./images/dark-mode.png";
+import Swal from 'sweetalert2'
 import concert2 from "./images/concert2.jpg";
 import blue1 from "./images/blue1.png";
-import pinkblue2 from "./images/pinkblue2.png"
 import blue2 from "./images/blue2.png";
 import blue3 from "./images/blue3.png";
 import blue4 from "./images/blue4.png";
-import pinkblue4 from "./images/pinkblue4.png";
-import pinkblue6 from "./images/pinkblue6.png";
-import pinkblue8 from "./images/pinkblue8.png";
 
 
 const theme = createTheme({
@@ -36,16 +31,39 @@ function EventsCount() {
     const [isB4, setB4] = useState(false);
     const [isB5, setB5] = useState(false);
     const [isButtonHovered, setIsButtonHovered] = useState(false);
-    const [selectedCard, setSelectedCard] = useState(null);
+    const [selectedCard1, setSelectedCard1] = useState(null);
+    const [selectedCard2, setSelectedCard2] = useState(null);
 
-    const handleCardClick = (cardName) => {
-        setSelectedCard(cardName === selectedCard ? null : cardName);
+    const handleCardClick1 = (cardName) => {
+        setSelectedCard1(cardName === selectedCard1 ? null : cardName);
     };
 
-    const getCardBorderStyle = (cardName) => {
-        return selectedCard === cardName
+    const getCardBorderStyle1 = (cardName) => {
+        return selectedCard1 === cardName
             ? { border: '#11047A solid 2px'}
             : {};
+    };
+
+    const handleCardClick2 = (cardName) => {
+        setSelectedCard2(cardName === selectedCard2 ? null : cardName);
+    };
+
+    const getCardBorderStyle2 = (cardName) => {
+        return selectedCard2 === cardName
+            ? { border: '#11047A solid 2px'}
+            : {};
+    };
+
+    const handleContinue = () => {
+        if (!selectedCard1 || !selectedCard2) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please select an option for both questions.',
+            });
+        } else {
+            // Navigate to the eventsForm page
+            window.location.href = '/eventsForm';
+        }
     };
 
     return (
@@ -58,32 +76,32 @@ function EventsCount() {
                         <Typography style={{paddingTop:'5%',textAlign:'center', paddingBottom:'2%'}} className="Header2">How many events are you planning to create?</Typography>
                         <Grid container style={{ marginTop: '0.8%',  justifyContent: 'center', paddingBottom:'7%', position:'relative'}} spacing={3}>
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}}>
-                                <Card className="card" onMouseEnter={() => setA1(true)} onMouseLeave={() => setA1(false)}  onClick={()=>handleCardClick("A1")} 
-                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A1") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setA1(true)} onMouseLeave={() => setA1(false)}  onClick={()=>handleCardClick1("A1")} 
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle1("A1") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
                                         <Typography style={{textAlign:'center', fontSize:''}} className= "text1">Only 1</Typography>
                                    </CardContent>
                                 </Card>
                             </Grid>
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
-                                <Card className="card" onMouseEnter={() => setA2(true)} onMouseLeave={() => setA2(false)}  onClick={()=>handleCardClick("A2")} 
-                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A2") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setA2(true)} onMouseLeave={() => setA2(false)}  onClick={()=>handleCardClick1("A2")} 
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle1("A2") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
                                         <Typography style={{textAlign:'center'}} className= "text1">2/10</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
-                                <Card className="card" onMouseEnter={() => setA3(true)} onMouseLeave={() => setA3(false)}  onClick={()=>handleCardClick("A3")} 
-                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A3") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setA3(true)} onMouseLeave={() => setA3(false)}  onClick={()=>handleCardClick1("A3")} 
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle1("A3") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
                                         <Typography style={{textAlign:'center'}} className="text1">10+</Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}}>
-                                <Card className="card" onMouseEnter={() => setA4(true)} onMouseLeave={() => setA4(false)}  onClick={()=>handleCardClick("A4")} 
-                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("A4"), borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA4 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setA4(true)} onMouseLeave={() => setA4(false)}  onClick={()=>handleCardClick1("A4")} 
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle1("A4"), borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isA4 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
                                         <Typography style={{textAlign:'center'}} className="text1">Not Sure</Typography>
                                     </CardContent>
@@ -101,8 +119,8 @@ function EventsCount() {
                         <Grid container style={{ marginTop: '0.5%',  justifyContent: 'center'}} spacing={3}>
 
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}}>
-                                <Card className="card" onMouseEnter={() => setB1(true)} onMouseLeave={() => setB1(false)}  onClick={()=>handleCardClick("B1")} 
-                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("B1") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background:'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setB1(true)} onMouseLeave={() => setB1(false)}  onClick={()=>handleCardClick2("B1")} 
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle2("B1") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background:'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB1 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
                                         <Typography style={{textAlign:'center'}} className= "text1">25 people</Typography>
                                     </CardContent>
@@ -110,8 +128,8 @@ function EventsCount() {
                             </Grid>
 
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
-                                <Card className="card" onMouseEnter={() => setB2(true)} onMouseLeave={() => setB2(false)}  onClick={()=>handleCardClick("B2")} 
-                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle("B2") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setB2(true)} onMouseLeave={() => setB2(false)}  onClick={()=>handleCardClick2("B2")} 
+                                  style={{ width: '200px', height: '200px',  ...getCardBorderStyle2("B2") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB2 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{ position: 'relative', paddingTop:'55px'  }}>
                                         <Typography style={{textAlign:'center'}} className="text1">25-50 people</Typography>
                                     </CardContent>
@@ -119,8 +137,8 @@ function EventsCount() {
                             </Grid>
 
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
-                                <Card className="card" onMouseEnter={() => setB3(true)} onMouseLeave={() => setB3(false)}  onClick={()=>handleCardClick("B3")} 
-                                  style={{width: '200px', height: '200px',  ...getCardBorderStyle("B3") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setB3(true)} onMouseLeave={() => setB3(false)}  onClick={()=>handleCardClick2("B3")} 
+                                  style={{width: '200px', height: '200px',  ...getCardBorderStyle2("B3") ,borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB3 ? 'scale(1.1)' : 'scale(1)' , transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{ position: 'relative', paddingTop:'55px'  }}>
                                         <Typography style={{textAlign:'center'}} className="text1">50-150 people</Typography>
                                     </CardContent>
@@ -128,8 +146,8 @@ function EventsCount() {
                             </Grid>
 
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
-                                <Card className="card" onMouseEnter={() => setB4(true)} onMouseLeave={() => setB4(false)} onClick={() =>handleCardClick("B4")}  
-                                style={{width: '200px', height: '200px', ...getCardBorderStyle("B4") , borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background:'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB4 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setB4(true)} onMouseLeave={() => setB4(false)} onClick={() =>handleCardClick2("B4")}  
+                                style={{width: '200px', height: '200px', ...getCardBorderStyle2("B4") , borderRadius: '0px', boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background:'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB4 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{ position: 'relative' , paddingTop:'55px' }}>
                                       <Typography style={{textAlign:'center'}} className= "text1">150+ people</Typography>
                                     </CardContent>
@@ -137,8 +155,8 @@ function EventsCount() {
                             </Grid>
 
                             <Grid item xs={10} sm={9} md={2} style={{zIndex:1}} >
-                                <Card className="card" onMouseEnter={() => setB5(true)} onMouseLeave={() => setB5(false)} onClick={() =>handleCardClick("B5")} 
-                               style={{width: '200px', height: '200px', maxHeight: '100%',  ...getCardBorderStyle("B5") , borderRadius: '0px',  boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB5 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
+                                <Card className="card" onMouseEnter={() => setB5(true)} onMouseLeave={() => setB5(false)} onClick={() =>handleCardClick2("B5")} 
+                               style={{width: '200px', height: '200px', maxHeight: '100%',  ...getCardBorderStyle2("B5") , borderRadius: '0px',  boxShadow: '0 4px 8px rgba(50, 50, 50, 0.5)', background: 'radial-gradient(circle, rgba(190,227,248,1) 7%, rgba(233,227,255,1) 81%)', transform: isB5 ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer' }}>
                                     <CardContent style={{  position: 'relative' , paddingTop:'75px' }}>
                                         <Typography style={{textAlign:'center'}} className="text1">Not Sure</Typography>
                                     </CardContent>
@@ -148,9 +166,9 @@ function EventsCount() {
                             <img src={blue4} style={{position: 'absolute', left: '0', width: '32%', zIndex:0, marginTop: '2.5%', paddingTop:'5%'}} /> 
                         </Grid>
 
-                        <Link to={"/eventsForm"}><Button  variant="contained"  onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} style={{width:'18%',height:'55px',color:'#11047A', marginLeft: '41%', marginTop:'180px', marginBottom:'100px', border: '#ffffff solid 2px', borderRadius: '20px', backgroundColor:'#e2e8f0', transform: isButtonHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer', fontSize:'22px' }}>
-                           CONTINUE</Button></Link>
-</Card>
+                        <Button  variant="contained" onClick={handleContinue} onMouseEnter={() => setIsButtonHovered(true)} onMouseLeave={() => setIsButtonHovered(false)} style={{width:'18%',height:'55px',color:'#11047A', marginLeft: '41%', marginTop:'180px', marginBottom:'100px', border: '#ffffff solid 2px', borderRadius: '20px', backgroundColor:'#e2e8f0', transform: isButtonHovered ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.5s ease', cursor: 'pointer', fontSize:'22px' }}>
+                           CONTINUE</Button>
+            </Card>
             </Card>
             </ThemeProvider>
         </div>
